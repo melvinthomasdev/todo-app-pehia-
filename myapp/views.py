@@ -36,3 +36,9 @@ def homepageview(request):
     context['message'] = "Hello Sanjana, this is a message for you..."
     return render(request, 'index.html', context)
 
+
+def TodoDetailView(request, tid):
+    context = {}
+    obj = Todo.objects.get(id=tid)
+    context['todo'] = obj
+    return render(request, 'detail.html', context)

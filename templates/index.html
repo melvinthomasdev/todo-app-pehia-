@@ -1,39 +1,30 @@
+{% extends 'base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To Do  App</title>
-
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
-
-</head>
-<body>
+{% block body %}
+   
 <h1>Add ToDos</h1>
-    <form method="POST">
-        {% csrf_token %}
-            <input type="text" name='title' placeholder="Title">
-            <input type="text" name="desc" placeholder="description">
-            <button type="submit">Add Todo</button>
-    </form>
-    <h2> TODOs</h2>
-    <ol>
+        <form method="POST">
+            {% csrf_token %}
+                <input type="text" name='title' placeholder="Title">
+                <input type="text" name="desc" placeholder="description">
+                <button type="submit">Add Todo</button>
+        </form>
+        <h2> TODOs</h2>
+        <ol>
 
-        {% for todo in works %}
-        <li>{{  todo.title }} --> {{ todo.description }}</li> 
-        {% endfor %}
-        <!-- JINJA 2 -->
-        <!-- <li>Sanjana</li>
-        <li>Christina</li>
-        <li>Shardha</li>
-        <li>Melvin</li> -->
-    </ol>
+            {% for todo in works %}
+            <li><a href="{% url 'detail' todo.id %}">{{ todo.title }} </a></li> 
+            {% endfor %}
+            <!-- JINJA 2 -->
+            <!-- <li>Sanjana</li>
+            <li>Christina</li>
+            <li>Shardha</li>
+            <li>Melvin</li> -->
+        </ol>
 
-    {{ message }}
+        {{ message }}
 
-    <img src="{% static 'img/dice.jpg' %}">
-</body>
-</html>
+        <img src="{% static 'img/dice.jpg' %}">
+
+{% endblock body %}

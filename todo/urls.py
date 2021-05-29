@@ -18,10 +18,11 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 
-from myapp.views import homepageview
+from myapp.views import homepageview, TodoDetailView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', homepageview, name='home'),
+    path('todo/<int:tid>', TodoDetailView, name='detail')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

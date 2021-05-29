@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from .models import Todo
@@ -22,7 +22,17 @@ from .models import Todo
 
 def homepageview(request):
     context = {}
+
+    if request.POST:
+        # print('The POST dictionary is: ', end=" ")
+        # print(request.POST)
+        title = request.POST.get('title')
+        description = request.POST.get('desc')
+        if (title and description):
+            todo = Todo(title=title, description=description)
+            todo.save()
     todos = Todo.objects.all()
     context['works'] = todos
     context['message'] = "Hello Sanjana, this is a message for you..."
     return render(request, 'index.html', context)
+
